@@ -1,0 +1,7 @@
+{
+    "env": {
+        "MONGO_USER": "Reg",
+        "MONGO_PASSWORD":"pqyilo8QXCDfttYF",
+        "MONGO_DB": "event-ract-dev"
+    }
+}
