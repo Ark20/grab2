@@ -1,0 +1,33 @@
+
+const User = require('../../models/user')
+
+
+
+module.exports = {
+createUser: (args) => {
+    return User.findOne({email: args.userInput.email}).then(user=> {
+        if(user) {
+            throw new Error('User exists already')
+        }
+        return bcrypt
+    .hash(args.userInput.password,12)
+    }) 
+    .then(hashedPassword => {
+        console.log()
+        const user = new User({
+            email: args.userInput.email,
+            password: hashedPassword
+        })
+       return user.save()
+     })
+     .then(result => {
+        return {...result._doc, password: null, _id: result.id } //sets pw to null
+     })
+     .catch(err => {
+        throw err;
+    })
+
+
+
+}
+}
