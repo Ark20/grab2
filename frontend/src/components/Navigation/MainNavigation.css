@@ -1,0 +1,48 @@
+.navHeader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 40%;
+    background: lavender; 
+    padding: 10px; 
+    height: 3.0rem;
+    display: flex;
+    align-items: center;
+}
+
+.navLogo {
+    margin: 0 ; 
+    font-size: 1.5rem;
+}
+
+.navItem {
+    margin: 0 0 0 1.5rem;
+    padding: 0; 
+    list-style: none
+}
+
+.navItem ul {
+    padding: 0; 
+    list-style: none;
+    display: flex;
+}
+.navItem li{
+    margin: 0 1rem
+}
+.navItem a{
+    text-decoration: none;
+    color: white
+
+}
+
+.navItem a:hover,
+.navItem a:active,
+.navItem a.active
+
+{
+    color: burlywood
+
+}
+.main{
+    margin:5rem 2.5rem
+}
