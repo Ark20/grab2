@@ -13,11 +13,11 @@ const app  = express()
 
 const graphQLSchema = require('./graphql/schema/index')
 const graphQLResolver = require('./graphql/resolvers/index')
-
+const isAuth = require('./middleware/is-auth')
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
+app.use(isAuth)
 
 //use graphql middelware 
 app.use(

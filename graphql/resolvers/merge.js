@@ -46,7 +46,7 @@ const singleEvent = async eventId => {
         throw(error)
     }
 }
-
+//this is only used in the user function to find events using an array of event ids stored on a users event prop 
 const events = eventIds => {
     return Event.find({_id : {$in: eventIds}})//find all ids that are in list 
     .then(events => {

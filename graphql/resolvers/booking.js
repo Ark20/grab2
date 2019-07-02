@@ -14,15 +14,15 @@ module.exports = {
     //resolvers should have same names as queries ,
     // function called when request looks for events 
  
-    bookings: async () => { //returns all bookings 
+    bookings: async () => { 
         try{
-           const bookings = await Booking.find()
+           const bookings = await Booking.find()//return all bookings using mongoose find 
 
-           return bookings.map(booking => {
+           return bookings.map(booking => { //map over bookings 
                let dog = transformBooking(booking)
                console.log(dog)
 
-               return transformBooking(booking)
+               return transformBooking(booking) //return transformed bookings 
            })
         }catch (err){
             throw err
@@ -30,10 +30,13 @@ module.exports = {
 
     },
 
-bookEvent: async args => {
+bookEvent: async (args,req) => {
+    if(!req.isAuth){
+        throw new Error('unauthenicated')
+    }
     const fetchedEvent = await Event.findOne({_id: args.eventId}) 
     const booking = new Booking({
-        user: "5d02818ed3e4fbcf71318d30",
+        user: req.userId,
         event: fetchedEvent
     })
     const result = await booking.save()

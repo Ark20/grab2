@@ -25,15 +25,17 @@ module.exports = {
         })
     },
     //args holds all arguments 
-    createEvent: (args) => {
-
+    createEvent: (args,req) => {
+        if(!req.isAuth){
+            throw new Error('unauthenicated')
+        }
 //when an event is created find the user it's linked to and add the event to the users list of events 
         const event = new Event({
             title: args.eventInput.title,
             description: args.eventInput.description,
             price: +args.eventInput.price,
             date: new Date(args.eventInput.date),
-            creator: "5d02818ed3e4fbcf71318d30"
+            creator: req.userId
         });
         let createdEvent;//variable to store created event
         return event 
@@ -41,7 +43,7 @@ module.exports = {
             .then(result => {//onece event is saved 
                 createdEvent = transformEvent(result)//store event in var 
 
-            return User.findById('5d02818ed3e4fbcf71318d30')    
+            return User.findById(req.userId)    
         })
         .then(user => {
             if(!user) {
