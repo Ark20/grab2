@@ -7,11 +7,12 @@ import MainNavigation from './components/Navigation/MainNavigation'
 import AuthContext from './context/auth-context'
 
 export default class App extends Component {
-
+//set state of token and user id to be null 
 state = {
   token: null,
   userId: null
  }; 
+ //define login function that takes token, user id and sets state 
 login = (token, userId, tokenExpiration) =>{
  this.setState({ token: token, userId: userId})
 }
@@ -33,12 +34,18 @@ render(){
         <MainNavigation/>
         <main className="main">
           <Switch>
-            {!this.state.token &&<Redirect from="/" to="/auth" exact/>}
             {this.state.token &&<Redirect from="/" to="/events" exact/>}
-            {this.state.token &&<Redirect from="/auth" to="/events" exact/>}
-            {!this.state.token && <Route path="/auth" component ={AuthPage}/>}
+            {this.state.token && (
+            <Redirect from="/auth" to="/events" exact/>
+            )}
+            {!this.state.token && (
+            <Route path="/auth" component ={AuthPage}/>)}
             <Route path="/events" component ={EventsPage}/>
-            {this.state.token && <Route path="/bookings" component ={BookingPage}/>}
+            {this.state.token && (
+            <Route path="/bookings" component ={BookingPage}/>
+            )}
+            {!this.state.token && <Redirect to="/auth" exact/>}
+
           </Switch>
       </main>
       </AuthContext.Provider>

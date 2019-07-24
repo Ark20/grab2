@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import './Auth.css' 
 import AuthContext from '../context/auth-context'
-
+// initate  auth page component 
+//set state of logged in to true 
 class AuthPage extends Component {
 
     state = {
         isLogin:true
     }
-
+//
 static contextType = AuthContext
 
     constructor(props){
@@ -15,25 +16,25 @@ static contextType = AuthContext
     this.emailEl = React.createRef()
     this.passwordEl = React.createRef()  
     }
-
+//pass in previous state and return opposite 
     switchMode = () => {
         this.setState(prevState => {
             return {isLogin: !prevState.isLogin}
         })
     }
-
+//set submit handler for login button 
     submitHandler = (event) => {
         event.preventDefault()
         const email = this.emailEl.current.value
         const password = this.passwordEl.current.value
-
+//if blank don't do anything 
         if(email.trim().length === 0 || password.trim().length === 0) {
             return; 
         }
 
         console.log(email,password)
         console.log(this.state.isLogin)
-
+//if user credentials have been filled try logging in 
         let requestBody = {
             query: `
                 query {
@@ -46,7 +47,7 @@ static contextType = AuthContext
             `
         };
         
-        
+ //if form is being used for sign up create new user in request body      
 if(!this.state.isLogin){
         requestBody = {
             query: `
@@ -59,7 +60,7 @@ if(!this.state.isLogin){
             `
         }
     }
-        fetch('http://localhost:8000/graphql', {
+        fetch('http://localhost:8000/graphql', {// call request with request body set above 
             method: 'POST',
             body: JSON.stringify(requestBody),
             headers: {
@@ -72,9 +73,9 @@ if(!this.state.isLogin){
             return res.json()
             })
             .then(resData => {
-                if(resData.data.login.token) {
-                    this.context.login(
-                        resData.data.login.token, 
+                if(resData.data.login.token) {//if theres a token set 
+                    this.context.login( //
+                        resData.data.login.token, //call login from context with token, user id 
                         resData.data.login.userId, 
                         resData.data.tokenExpiration
                         )
