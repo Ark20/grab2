@@ -8,11 +8,14 @@
     height: 3.0rem;
     display: flex;
     align-items: center;
-}
+    justify-content: space-between;
+    box-sizing: border-box;}
 
 .navLogo {
     margin: 0 ; 
     font-size: 1.5rem;
+    color: #dfcefc;
+
 }
 
 .navItem {
@@ -22,27 +25,39 @@
 }
 
 .navItem ul {
-    padding: 0; 
-    list-style: none;
     display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  align-items: center;
 }
 .navItem li{
     margin: 0 1rem
 }
-.navItem a{
+.navItem a,
+.navItem button
+{
     text-decoration: none;
-    color: white
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    font: inherit;
+    background: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    margin: 0;
 
 }
 
 .navItem a:hover,
 .navItem a:active,
 .navItem a.active
-
 {
-    color: burlywood
-
+    background: #ffffff;
+    color: #5101d1;
+    border-radius: 5px;
 }
 .main{
     margin:5rem 2.5rem
 }
+

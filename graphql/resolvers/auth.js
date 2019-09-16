@@ -39,7 +39,7 @@ login: async ({email,password}) => {
     if (!isEqual){
         throw new Error('no usr');
 
-    }
+    } //returns JWT  as string 
     const token = jwt.sign({userId: user.id, email: user.email}, 'somesupersecretkeytohashandvalidate', {
         expiresIn: '1h',
     })
